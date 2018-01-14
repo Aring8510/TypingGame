@@ -4,15 +4,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
    <children>
       <Pane prefHeight="129.0" prefWidth="600.0">
          <children>
-            <Label fx:id="text" layoutX="3.0" layoutY="5.0" prefHeight="90.0" prefWidth="591.0" text="Label" />
+            <Label fx:id="text0" layoutX="10.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <Label fx:id="text1" layoutX="10.0" layoutY="20.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <Label fx:id="text2" layoutX="10.0" layoutY="40.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <Label fx:id="text3" layoutX="10.0" layoutY="60.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <Label fx:id="text4" layoutX="10.0" layoutY="80.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
          </children>
       </Pane>
       <Pane prefHeight="235.0" prefWidth="600.0" />
-      <Pane prefHeight="116.0" prefWidth="600.0" />
+      <Pane prefHeight="116.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="input" text="Label" />
+         </children></Pane>
    </children>
 </VBox>
