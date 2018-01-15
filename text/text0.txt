@@ -1,0 +1,12 @@
+public void mapPrint(MoveChara c, MapData m){
+for(int y=0; y<mapData.getHeight(); y++){
+for(int x=0; x<mapData.getWidth(); x++){
+int index = y*mapData.getWidth() + x;
+if (x==c.getPosX() && y==c.getPosY()){
+mapImageView[index].setImage(c.getImage());
+} else {
+mapImageView[index].setImage(m.getImage(x,y));
+}
+}
+}
+}

@@ -11,51 +11,77 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.media.AudioClip;
+import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
 import java.io.File;
 import java.io.FileReader;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.collections.ObservableList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class GameController implements Initializable {
     public int index = 0;
-    public Label text0;
+    public TextFlow text0;
     public Label text1;
     public Label text2;
     public Label text3;
     public Label text4;
     public Label text5;
     public Label input;
+    public String[] s;
+    public String t = "";
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        read();
         printType();
     }
-    public void keyAction(KeyEvent event){
-        //KeyCode key = event.getCode();
-        String keyInput = event.getText();
-        System.out.println(keyInput);
-        input.setText(keyInput);
+    public void keyAction (KeyEvent event){
+        KeyCode code = event.getCode();
+        String key = event.getText();
+        System.out.println("key"+key);
+        if(code==KeyCode.ENTER&&s[index].length()==0){
+           System.out.println("ENTER pressed");
+           t="";
+           index++;
+        }else if(key.equals("")){
+            return;
+        } else if (s[index].indexOf(key)==0){
+            t = t.concat(s[index].substring(0,1));
+            s[index]=s[index].substring(1);
+        }
+        printType();
     }
-    public String[] printType(){
-        String[] s = new String[5];
-        String[] t = new String[5];
-        try{
-            File file = new File ("text/text0.txt");
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            for(int i = 0;i<5;i++){
-                s[i] = br.readLine();
+    public void printType(){
+        Text before = new Text(t);
+        System.out.println("s : "+s[index]);
+        System.out.println("t ; "+t);
+        before.setFill(Color.RED);
+        before.setFont(new Font(20));
+        Text after = new Text(s[index]);
+        after.setFont(new Font(20));
+        after.setFill(Color.BLUE);
+        text0.getChildren().setAll(before,after);
+        Label[] texts = {text1,text2,text3,text4};
+        for(int i=0; i <= 3; i++) {
+            if(s.length > index+i+1){
+                texts[i].setText(s[index+i+1]);
+            } else {
+                texts[i].setText("");
             }
-            text0.setText(s[0]);
-            text1.setText(s[1]);
-            text2.setText(s[2]);
-            text3.setText(s[3]);
-            text4.setText(s[4]);
+        }
+    }
+    public void read(){
+        try{
+            List<String> l = Files.readAllLines(Paths.get("text/text0.txt"));
+            s = l.toArray(new String[l.size()]);
         }catch(Exception e){
             System.out.println(e);
         }
-        return s;
     }
 }
