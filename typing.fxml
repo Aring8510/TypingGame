@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keyAction" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
    <children>
-      <Pane prefHeight="129.0" prefWidth="600.0">
+       <Pane focusTraversable="true" prefHeight="216.0" prefWidth="600.0">
          <children>
-            <Label fx:id="text0" layoutX="10.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
-            <Label fx:id="text1" layoutX="10.0" layoutY="20.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
-            <Label fx:id="text2" layoutX="10.0" layoutY="40.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
-            <Label fx:id="text3" layoutX="10.0" layoutY="60.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
-            <Label fx:id="text4" layoutX="10.0" layoutY="80.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <TextFlow fx:id="text0" layoutX="10.0" prefHeight="40.0" prefWidth="550.0" />
+            <Label fx:id="text1" layoutX="10.0" layoutY="40.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <Label fx:id="text2" layoutX="10.0" layoutY="60.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <Label fx:id="text3" layoutX="10.0" layoutY="80.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <Label fx:id="text4" layoutX="10.0" layoutY="100.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
+            <Label fx:id="text5" layoutX="10.0" layoutY="120.0" prefHeight="20.0" prefWidth="550.0" text="Label" />
          </children>
       </Pane>
-      <Pane prefHeight="235.0" prefWidth="600.0" />
+      <Pane prefHeight="235.0" prefWidth="600.0">
+         <children>
+            <ImageView fx:id="slot0" fitHeight="150.0" fitWidth="200.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slot1" fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slot2" fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+         </children></Pane>
       <Pane prefHeight="116.0" prefWidth="600.0">
          <children>
-            <Label fx:id="input" text="Label" />
+            <Label fx:id="input" layoutX="432.0" layoutY="25.0" text="All" />
+            <Label fx:id="score" layoutX="42.0" layoutY="22.0" text="Label" />
+            <Label fx:id="allScore" layoutX="462.0" layoutY="9.0" prefHeight="46.0" prefWidth="87.0" text="Label" />
          </children></Pane>
    </children>
 </VBox>
