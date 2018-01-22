@@ -16,7 +16,6 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import javafx.scene.text.Text;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -25,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
+import javafx.scene.media.AudioClip;
 
 public class GameController implements Initializable {
     public int index = 0;
@@ -34,6 +34,9 @@ public class GameController implements Initializable {
     public Label text3;
     public Label text4;
     public Label text5;
+    public Label score;
+    public Label allScore;
+    public AudioClip se = new AudioClip(Paths.get("se.wav").toUri().toString());
     public Label input;
     public ImageView slot0;
     public ImageView slot1;
@@ -44,6 +47,8 @@ public class GameController implements Initializable {
     long endTime = 0;
     int focus = 0;
     long result = 0;
+    int point[] = new int[3];
+    int scr = 0;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         init();
@@ -59,17 +64,34 @@ public class GameController implements Initializable {
         String key = event.getText();
         System.out.println("key"+key);
         if(code==KeyCode.ENTER&&s[index].length()==0){
-           System.out.println("ENTER pressed");
-           t="";
-           index++;
+            System.out.println("ENTER pressed");
+            t="";
+            index++;
+            se = new AudioClip(Paths.get("se3.wav").toUri().toString());
+            se.play();
         }else if(key.equals("")){
-           return;
+            return;
         } else if (s[index].indexOf(key)==0){
             t = t.concat(s[index].substring(0,1));
             s[index]=s[index].substring(1);
             stop();
             input.setText(String.valueOf(result));
             start();
+        }else{
+            se = new AudioClip(Paths.get("se2.wav").toUri().toString());
+            point[focus]=-1;
+            switch(focus){
+                case 0 : 
+                    slot0.setImage(new Image (getClass().getResourceAsStream("pic/3.png")));
+                    break;
+                case 1 : 
+                    slot1.setImage(new Image (getClass().getResourceAsStream("pic/3.png")));
+                    break;
+                case 2 : 
+                    slot2.setImage(new Image (getClass().getResourceAsStream("pic/3.png")));
+                    break;
+            }
+            judge();
         }
         printType();
     }
@@ -111,9 +133,9 @@ public class GameController implements Initializable {
         if (result<500){
             select = 0;
         }else{
-            select = rnd.nextInt(4);
+            select = rnd.nextInt(3);
         }
-        
+
         switch(focus){
             case 0:
                 switch(select){
@@ -125,9 +147,6 @@ public class GameController implements Initializable {
                         break;
                     case 2:
                         slot0.setImage(new Image (getClass().getResourceAsStream("pic/2.png")));
-                        break;
-                    case 3:
-                        slot0.setImage(new Image (getClass().getResourceAsStream("pic/3.png")));
                         break;
                 }
                 break;
@@ -142,9 +161,6 @@ public class GameController implements Initializable {
                     case 2:
                         slot1.setImage(new Image (getClass().getResourceAsStream("pic/2.png")));
                         break;
-                    case 3:
-                        slot1.setImage(new Image (getClass().getResourceAsStream("pic/3.png")));
-                        break;
                 }
                 break;
             case 2:
@@ -158,19 +174,31 @@ public class GameController implements Initializable {
                     case 2:
                         slot2.setImage(new Image (getClass().getResourceAsStream("pic/2.png")));
                         break;
-                    case 3:
-                        slot2.setImage(new Image (getClass().getResourceAsStream("pic/3.png")));
-                        break;
                 }
         }
+        point[focus] = select;
+        se = new AudioClip(Paths.get("se.wav").toUri().toString());
+        judge();
+    }
+    void judge(){
         focus++;
+        score.setText("0");
         if (focus==3){
+            if(point[0]==point[1]&&point[1]==point[2]&&point[0]!=-1){
+                scr+= 100;
+                score.setText("100");
+                allScore.setText(String.valueOf(scr));
+                se = new AudioClip(Paths.get("se0.wav").toUri().toString());
+            }else{
+                se = new AudioClip(Paths.get("se1.wav").toUri().toString());
+            }
             focus=0;
-            
         }
         if (focus==1){
             slot1.setImage(new Image (getClass().getResourceAsStream("pic/null.png")));
             slot2.setImage(new Image (getClass().getResourceAsStream("pic/null.png")));
         }
+        se.play();
+
     }
 }
